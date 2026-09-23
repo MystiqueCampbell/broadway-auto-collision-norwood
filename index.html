@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Website Audit & Proposal | OneTap Technology</title>
+	<style>
+		:root {
+			--primary: #0f172a;
+			--accent: #2563eb;
+			--success: #16a34a;
+			--bg-color: #f1f5f9;
+			--card-bg: #ffffff;
+			--text-color: #334155;
+			--border-color: #cbd5e1;
+		}
+
+		body {
+			margin: 0;
+			padding: 30px 20px;
+			background-color: var(--bg-color);
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+			color: var(--text-color);
+			line-height: 1.6;
+		}
+
+		.page-container {
+			max-width: 750px;
+			margin: 0 auto;
+		}
+
+		.admin-panel {
+			background: #1e293b;
+			color: #f8fafc;
+			padding: 25px;
+			border-radius: 12px;
+			margin-bottom: 30px;
+			box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+			border-left: 6px solid #38bdf8;
+		}
+
+		.admin-panel h3 {
+			margin-top: 0;
+			color: #38bdf8;
+			font-size: 1.15rem;
+			border: none;
+			padding: 0;
+		}
+
+		.control-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 15px;
+			margin-top: 15px;
+		}
+
+		@media (max-width: 600px) {
+			.control-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.control-group label {
+			display: block;
+			font-size: 0.85rem;
+			font-weight: bold;
+			color: #cbd5e1;
+			margin-bottom: 5px;
+		}
+
+		.control-group input,
+		.control-group select {
+			width: 100%;
+			padding: 9px 12px;
+			border-radius: 6px;
+			border: 1px solid #475569;
+			background: #0f172a;
+			color: #fff;
+			font-size: 0.9rem;
+			box-sizing: border-box;
+		}
+
+		.admin-actions {
+			margin-top: 20px;
+			display: flex;
+			gap: 10px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.btn-generate {
+			background-color: #38bdf8;
+			color: #0f172a;
+			border: none;
+			padding: 12px 20px;
+			font-weight: 700;
+			border-radius: 6px;
+			cursor: pointer;
+			transition: background 0.2s;
+		}
+
+		.btn-generate:hover {
+			background-color: #0ea5e9;
+		}
+
+		#copyNotification {
+			color: #4ade80;
+			font-size: 0.85rem;
+			font-weight: bold;
+			display: none;
+		}
+
+		.proposal-card {
+			background-color: var(--card-bg);
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+			border-top: 6px solid var(--accent);
+			padding: 40px;
+		}
+
+		.brand-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			border-bottom: 1px solid #e2e8f0;
+			padding-bottom: 20px;
+			margin-bottom: 25px;
+		}
+
+		.brand-name {
+			font-size: 0.85rem;
+			text-transform: uppercase;
+			letter-spacing: 1.5px;
+			color: var(--accent);
+			font-weight: 700;
+		}
+
+		h1 {
+			margin: 5px 0 0 0;
+			font-size: 1.6rem;
+			color: var(--primary);
+		}
+
+		.meta-date {
+			font-size: 0.85rem;
+			color: #64748b;
+			text-align: right;
+		}
+
+		.info-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 15px;
+			background-color: #f8fafc;
+			border: 1px solid #e2e8f0;
+			border-radius: 8px;
+			padding: 20px;
+			margin-bottom: 25px;
+		}
+
+		.info-item p {
+			margin: 0 0 5px 0;
+			font-size: 0.9rem;
+			color: #64748b;
+		}
+
+		.info-item strong {
+			color: var(--primary);
+		}
+
+		h3 {
+			margin: 25px 0 10px 0;
+			font-size: 1.15rem;
+			color: var(--primary);
+			border-left: 4px solid var(--accent);
+			padding-left: 10px;
+		}
+
+		.strategy-box {
+			background-color: #f0fdf4;
+			border: 1px solid #bbf7d0;
+			padding: 15px 20px;
+			border-radius: 6px;
+			color: #166534;
+			font-size: 0.95rem;
+		}
+
+		.audit-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 20px;
+			margin-top: 20px;
+		}
+
+		@media (max-width: 600px) {
+
+			.audit-grid,
+			.info-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.audit-col {
+			background: #f8fafc;
+			border: 1px solid #e2e8f0;
+			border-radius: 8px;
+			padding: 20px;
+		}
+
+		.audit-col.findings {
+			background-color: #fffbfa;
+			border-color: #fed7d7;
+		}
+
+		.audit-col.improvements {
+			background-color: #f0fdf4;
+			border-color: #bbf7d0;
+		}
+
+		.audit-col h4 {
+			margin: 0 0 12px 0;
+			font-size: 1rem;
+		}
+
+		.audit-col.findings h4 {
+			color: #c53030;
+		}
+
+		.audit-col.improvements h4 {
+			color: #16a34a;
+		}
+
+		ul {
+			margin: 0;
+			padding-left: 18px;
+			font-size: 0.9rem;
+			color: #475569;
+		}
+
+		li {
+			margin-bottom: 8px;
+		}
+
+		.payment-section {
+			margin-top: 30px;
+			background: #f8fafc;
+			border: 1px solid #e2e8f0;
+			padding: 25px;
+			border-radius: 8px;
+		}
+
+		.payment-options-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 15px;
+			margin-top: 15px;
+		}
+
+		@media (max-width: 600px) {
+			.payment-options-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.payment-card {
+			background: #ffffff;
+			border: 2px solid #cbd5e1;
+			padding: 20px;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			text-align: center;
+		}
+
+		.payment-card:hover {
+			border-color: var(--accent);
+		}
+
+		.payment-card.selected {
+			border-color: var(--success);
+			background-color: #f0fdf4;
+			box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
+		}
+
+		.payment-card input[type="radio"] {
+			margin-bottom: 8px;
+			accent-color: var(--success);
+			transform: scale(1.2);
+		}
+
+		.payment-card .badge {
+			font-size: 0.75rem;
+			text-transform: uppercase;
+			font-weight: 700;
+			padding: 3px 8px;
+			border-radius: 4px;
+			display: inline-block;
+			margin-bottom: 8px;
+		}
+
+		.payment-card.option-1 .badge {
+			background: #dcfce7;
+			color: var(--success);
+		}
+
+		.payment-card.option-2 .badge {
+			background: #dbeafe;
+			color: var(--accent);
+		}
+
+		.payment-card h5 {
+			margin: 5px 0;
+			font-size: 1.05rem;
+			color: var(--primary);
+		}
+
+		.price-tag {
+			font-size: 1.3rem;
+			font-weight: bold;
+			color: var(--primary);
+			margin: 8px 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.original-price {
+			text-decoration: line-through;
+			color: #94a3b8;
+			font-size: 1rem;
+			font-weight: normal;
+		}
+
+		.discounted-price {
+			color: var(--success);
+			font-weight: 800;
+		}
+
+		.split-total-price {
+			color: var(--primary);
+			font-weight: 800;
+		}
+
+		.payment-card .desc {
+			font-size: 0.85rem;
+			color: #64748b;
+			margin: 0;
+		}
+
+		.action-container {
+			margin-top: 30px;
+			text-align: center;
+		}
+
+		.btn-submit {
+			background-color: var(--accent);
+			color: white;
+			border: none;
+			padding: 16px 35px;
+			font-size: 1.05rem;
+			font-weight: 700;
+			border-radius: 8px;
+			cursor: pointer;
+			display: inline-block;
+			text-decoration: none;
+			box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+			transition: background-color 0.2s;
+		}
+
+		.btn-submit:hover {
+			background-color: #1d4ed8;
+		}
+
+		.footer {
+			margin-top: 40px;
+			text-align: center;
+			font-size: 0.85rem;
+			color: #64748b;
+			border-top: 1px solid #e2e8f0;
+			padding-top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="page-container">
+
+		<div class="admin-panel" id="adminPanel">
+			<h3>🔐 Internal Proposal Generator Dashboard</h3>
+			<p style="font-size: 0.85rem; color: #94a3b8; margin-top: 5px;">Configure client numbers below. Clients will never see this panel or your calculation formulas when opening their secure link.</p>
+
+			<div class="control-grid">
+				<div class="control-group">
+					<label for="inputClientName">Client Contact Name:</label>
+					<input type="text" id="inputClientName" value="Jane Doe" oninput="updateLivePreview()">
+				</div>
+				<div class="control-group">
+					<label for="inputBusinessName">Business Name:</label>
+					<input type="text" id="inputBusinessName" value="Test Business" oninput="updateLivePreview()">
+				</div>
+				<div class="control-group">
+					<label for="inputWebsite">Website URL:</label>
+					<input type="text" id="inputWebsite" value="www.testbusiness.com" oninput="updateLivePreview()">
+				</div>
+				<div class="control-group">
+					<label for="pageCountInput">Page Count Scope:</label>
+					<select id="pageCountInput" onchange="updateLivePreview()">
+						<option value="3">3 Pages (Starter)</option>
+						<option value="5" selected>5 Pages (Standard)</option>
+						<option value="7">7 Pages (Growth)</option>
+						<option value="10">10 Pages (Enterprise)</option>
+					</select>
+				</div>
+				<div class="control-group" style="grid-column: span 2;">
+					<label for="complexityInput">Project Complexity / Features Tier:</label>
+					<select id="complexityInput" onchange="updateLivePreview()">
+						<option value="standard" selected>Standard Layout (Multi-page structure, responsive mobile, core setup)</option>
+						<option value="advanced">Advanced Features (Online booking, photo gallery, custom system integration)</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="admin-actions">
+				<button class="btn-generate" onclick="generateClientLink()">🔗 Copy Secure Client Link</button>
+				<span id="copyNotification">✓ Link copied to clipboard! You can now paste and send it to your client.</span>
+			</div>
+		</div>
+
+		<div class="proposal-card" id="proposalContent">
+
+			<!-- Header -->
+			<div class="brand-header">
+				<div>
+					<div class="brand-name">OneTap Technology</div>
+					<h1>Website Growth Proposal</h1>
+				</div>
+				<div class="meta-date" id="proposalDate">Date: 9/23/2026</div>
+			</div>
+
+			<!-- Greeting & Info Grid -->
+			<p>Hi <strong id="previewClientName">Jane Doe</strong>,</p>
+			<p>Thank you for reviewing your web presence assessment with OneTap Technology. Below is your tailored growth roadmap and investment breakdown for <strong id="previewBusinessName">Test Business</strong>.</p>
+
+			<div class="info-grid">
+				<div class="info-item">
+					<p>Client: <strong id="previewBusinessCardName">Test Business</strong></p>
+					<p>Website: <strong id="previewWebsite">www.testbusiness.com</strong></p>
+				</div>
+				<div class="info-item">
+					<p>Page Scope: <strong id="previewPageScope">5 Pages</strong></p>
+					<p>Selected Tier: <strong style="color: var(--accent);" id="previewTierName">Custom Enterprise Package</strong></p>
+				</div>
+			</div>
+
+			<!-- Strategy -->
+			<h3>Project Strategy & Scope</h3>
+			<div class="strategy-box" id="previewStrategyText">
+				Designed for an extensive website architecture or custom features (online store / system integrations), delivering robust multi-page structuring, automated workflows, and high-capacity performance.
+			</div>
+
+			<!-- Findings & Improvements Grid -->
+			<div class="audit-grid">
+				<div class="audit-col findings">
+					<h4>⚠️ What We Observed</h4>
+					<ul>
+						<li>Website scale identified as matching required page tier.</li>
+						<li>Current layout appears dated or visually unpolished.</li>
+						<li>Mobile smartphone experience is awkward, leading to lost leads.</li>
+						<li>Text messaging lacks clarity regarding customer benefits.</li>
+						<li>Visitors cannot easily tell what services are offered in the first 3 seconds.</li>
+						<li>Action buttons are hidden or missing.</li>
+						<li>Required functional setup: Online booking, Photo gallery, Reviews feed, Social integration, Newsletter signup.</li>
+					</ul>
+				</div>
+				<div class="audit-col improvements">
+					<h4>🚀 Recommended Fixes</h4>
+					<ul>
+						<li>Build and format pages with unified layout architecture.</li>
+						<li>Deploy a clean, modern aesthetic that builds immediate trust.</li>
+						<li>Optimize 100% of pages for smartphone tapability and speed.</li>
+						<li>Refine headline phrasing so visitors immediately understand offerings.</li>
+						<li>Implement prominent header hero sections with clear bullet points.</li>
+						<li>Place obvious "Call Now" or "Book Online" CTAs across every page.</li>
+						<li>Integrate and test all requested features.</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Payment Selection Section -->
+			<div class="payment-section">
+				<h3 style="margin-top: 0; border-left-color: var(--success);">Select Your Investment Option</h3>
+				<p style="font-size: 0.9rem; color: #475569; margin-bottom: 15px;">Affordable, scale-based project pricing tailored specifically for your scope. Please choose your preferred payment structure:</p>
+
+				<div class="payment-options-grid">
+					<!-- Option 1: Pay in Full with strike-through standard price and 10% off total -->
+					<div class="payment-card option-1 selected" id="opt1Card" onclick="selectPaymentOption(1)">
+						<input type="radio" name="paymentOption" id="radioOpt1" checked onchange="selectPaymentOption(1)">
+						<span class="badge">Best Value</span>
+						<h5>Pay in Full (10% Off)</h5>
+						<div class="price-tag" id="opt1PriceTag">
+							<span class="original-price" id="opt1Original">$1,249</span>
+							<span class="discounted-price" id="opt1Discounted">$1,124</span>
+						</div>
+						<p class="desc" id="opt1Desc">You instantly save $125 off standard pricing.</p>
+					</div>
+
+					<!-- Option 2: 4-Month Split Plan showing combined total sum in main price tag and breakdown in subtitle -->
+					<div class="payment-card option-2" id="opt2Card" onclick="selectPaymentOption(2)">
+						<input type="radio" name="paymentOption" id="radioOpt2" onchange="selectPaymentOption(2)">
+						<span class="badge">Cash Flow Friendly</span>
+						<h5>4-Month Split Plan</h5>
+						<div class="price-tag" id="opt2PriceTag">
+							<span class="split-total-price" id="opt2SplitTotal">$1,249</span>
+						</div>
+						<p class="desc" id="opt2Desc"><strong>$625 down</strong> + <strong>$156.25/mo</strong> for 4 months.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Acceptance Action Button -->
+			<div class="action-container">
+				<a href="#" id="acceptButton" class="btn-submit" onclick="handleAcceptProposal(event)">
+					Accept Proposal & Send Confirmation ✉️
+				</a>
+				<p style="font-size: 0.8rem; color: #64748b; margin-top: 12px;">Clicking this opens your email client pre-configured with your selected dynamic payment option.</p>
+			</div>
+
+			<!-- Footer -->
+			<div class="footer">
+				<strong>OneTap Technology</strong> — Professional Web Development & Digital Growth Solutions
+			</div>
+
+		</div>
+
+	</div>
+
+	<script>
+		let selectedOption = 1;
+
+		function selectPaymentOption(optionNum) {
+			selectedOption = optionNum;
+			const card1 = document.getElementById('opt1Card');
+			const card2 = document.getElementById('opt2Card');
+			const radio1 = document.getElementById('radioOpt1');
+			const radio2 = document.getElementById('radioOpt2');
+
+			if (optionNum === 1) {
+				card1.classList.add('selected');
+				card2.classList.remove('selected');
+				radio1.checked = true;
+				radio2.checked = false;
+			} else {
+				card2.classList.add('selected');
+				card1.classList.remove('selected');
+				radio2.checked = true;
+				radio1.checked = false;
+			}
+		}
+
+		// Pricing calculation engine
+		function calculateProposalData(pageCount, complexity) {
+			const baseFee = 499;
+			const pricePerPage = 150;
+
+			let subtotal = baseFee + (pageCount * pricePerPage);
+			let multiplier = (complexity === 'advanced') ? 1.2 : 1.0;
+
+			let standardPrice = Math.round(subtotal * multiplier);
+			let payInFullPrice = Math.round(standardPrice * 0.90);
+			let savings = standardPrice - payInFullPrice;
+
+			let downPayment = Math.round(standardPrice * 0.50);
+			let remainingBalance = standardPrice - downPayment;
+			let monthlyPayment = (remainingBalance / 4).toFixed(2);
+
+			// Combined total sum of down payment plus 4 monthly payments
+			let splitPlanTotalSum = downPayment + (parseFloat(monthlyPayment) * 4);
+
+			return {
+				pageCount,
+				standardPrice,
+				payInFullPrice,
+				savings,
+				downPayment,
+				monthlyPayment,
+				splitPlanTotalSum
+			};
+		}
+
+		// Live preview update for admin panel typing
+		function updateLivePreview() {
+			const cName = document.getElementById('inputClientName').value || "Jane Doe";
+			const bName = document.getElementById('inputBusinessName').value || "Test Business";
+			const web = document.getElementById('inputWebsite').value || "www.testbusiness.com";
+			const pages = parseInt(document.getElementById('pageCountInput').value) || 5;
+			const comp = document.getElementById('complexityInput').value;
+
+			document.getElementById('previewClientName').innerText = cName;
+			document.getElementById('previewBusinessName').innerText = bName;
+			document.getElementById('previewBusinessCardName').innerText = bName;
+			document.getElementById('previewWebsite').innerText = web;
+			document.getElementById('previewPageScope').innerText = pages + ' Pages';
+			document.getElementById('previewTierName').innerText = (pages >= 7 || comp === 'advanced') ? "Custom Enterprise Package" : "Standard Growth Package";
+
+			const data = calculateProposalData(pages, comp);
+
+			document.getElementById('opt1Original').innerText = '$' + data.standardPrice.toLocaleString();
+			document.getElementById('opt1Discounted').innerText = '$' + data.payInFullPrice.toLocaleString();
+			document.getElementById('opt1Desc').innerText = 'You instantly save $' + data.savings.toLocaleString() + ' off standard pricing.';
+
+			document.getElementById('opt2SplitTotal').innerText = '$' + data.splitPlanTotalSum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+			document.getElementById('opt2Desc').innerHTML = '<strong>$' + data.downPayment.toLocaleString() + ' down</strong> + <strong>$' + data.monthlyPayment + '/mo</strong> for 4 months.';
+		}
+
+		// Generate secure URL containing encoded parameters
+		function generateClientLink() {
+			const cName = document.getElementById('inputClientName').value;
+			const bName = document.getElementById('inputBusinessName').value;
+			const web = document.getElementById('inputWebsite').value;
+			const pages = document.getElementById('pageCountInput').value;
+			const comp = document.getElementById('complexityInput').value;
+
+			const dataObj = { c: cName, b: bName, w: web, p: pages, x: comp };
+			const encodedData = btoa(JSON.stringify(dataObj));
+
+			const secureURL = window.location.origin + window.location.pathname + '#' + encodedData;
+
+			navigator.clipboard.writeText(secureURL).then(() => {
+				const notification = document.getElementById('copyNotification');
+				notification.style.display = 'inline';
+				setTimeout(() => { notification.style.display = 'none'; }, 4000);
+			});
+		}
+
+		window.onload = function() {
+			if (window.location.hash) {
+				try {
+					const hashData = window.location.hash.substring(1);
+					const decoded = JSON.parse(atob(hashData));
+
+					document.getElementById('inputClientName').value = decoded.c || "Jane Doe";
+					document.getElementById('inputBusinessName').value = decoded.b || "Test Business";
+					document.getElementById('inputWebsite').value = decoded.w || "www.testbusiness.com";
+					document.getElementById('pageCountInput').value = decoded.p || "5";
+					document.getElementById('complexityInput').value = decoded.x || "standard";
+
+					// Hide the admin box when opened by a client via secure link
+					document.getElementById('adminPanel').style.display = 'none';
+				} catch (e) {
+					console.error("Invalid proposal token");
+				}
+			}
+
+			// Render initial state
+			updateLivePreview();
+		};
+
+		// Acceptance email action handler
+		function handleAcceptProposal(e) {
+			e.preventDefault();
+
+			const recipient = "campbellmystique@gmail.com";
+
+			let clientName = document.getElementById('previewClientName').innerText;
+			let businessName = document.getElementById('previewBusinessName').innerText;
+			let websiteUrl = document.getElementById('previewWebsite').innerText;
+			let pageScopeText = document.getElementById('previewPageScope').innerText;
+
+			let activePageCount = parseInt(pageScopeText) || 5;
+			let activeComplexity = document.getElementById('complexityInput').value;
+
+			if (window.location.hash) {
+				try {
+					const decoded = JSON.parse(atob(window.location.hash.substring(1)));
+					activeComplexity = decoded.x || 'standard';
+				} catch (err) {}
+			}
+
+			const data = calculateProposalData(activePageCount, activeComplexity);
+
+			let paymentPlanText = "";
+			let paymentDescText = "";
+
+			if (selectedOption === 1) {
+				paymentPlanText = "Pay in Full Plan (10% Off)";
+				paymentDescText = `Payment: $${data.payInFullPrice.toLocaleString()} total (Standard $${data.standardPrice.toLocaleString()} with 10% Discount Applied - Saved $${data.savings.toLocaleString()})`;
+			} else {
+				paymentPlanText = "4 Month Split Plan (Cash Flow Friendly)";
+				paymentDescText = `Payment: $${data.downPayment.toLocaleString()} down + $${data.monthlyPayment}/month for 4 months (Total Combined Sum: $${data.splitPlanTotalSum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})})`;
+			}
+
+			const subject = `Proposal Acceptance: ${businessName} - ${clientName}`;
+
+			const body =
+				"Hi OneTap Technology Team,\r\n" +
+				"\r\n" +
+				"I have reviewed the proposal for " + businessName + " and am ready to move forward with the project.\r\n" +
+				"\r\n" +
+				"==============================\r\n" +
+				"CLIENT & PROJECT DETAILS\r\n" +
+				"==============================\r\n" +
+				"• Client Name: " + clientName + "\r\n" +
+				"• Business Name: " + businessName + "\r\n" +
+				"• Website: " + websiteUrl + "\r\n" +
+				"• Selected Solution: Custom Enterprise Package (" + activePageCount + " Pages)\r\n" +
+				"\r\n" +
+				"==============================\r\n" +
+				"PAYMENT SELECTION\r\n" +
+				"==============================\r\n" +
+				"• Chosen Payment Plan: " + paymentPlanText + "\r\n" +
+				"• " + paymentDescText + "\r\n" +
+				"\r\n" +
+				"Please review these details and send over the invoice or onboarding agreement at your earliest convenience so we can get started.\r\n" +
+				"\r\n" +
+				"Best regards,\r\n" +
+				"\r\n" +
+				clientName + "\r\n" +
+				businessName;
+
+			const mailtoLink = "mailto:" + recipient + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+			window.location.href = mailtoLink;
+		}
+	</script>
+
+</body>
+
+</html>
