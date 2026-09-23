@@ -97,11 +97,6 @@
 			font-weight: 700;
 			border-radius: 6px;
 			cursor: pointer;
-			transition: background 0.2s;
-		}
-
-		.btn-generate:hover {
-			background-color: #0ea5e9;
 		}
 
 		#copyNotification {
@@ -270,18 +265,12 @@
 			padding: 20px;
 			border-radius: 8px;
 			cursor: pointer;
-			transition: all 0.2s ease;
 			text-align: center;
-		}
-
-		.payment-card:hover {
-			border-color: var(--accent);
 		}
 
 		.payment-card.selected {
 			border-color: var(--success);
 			background-color: #f0fdf4;
-			box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
 		}
 
 		.payment-card input[type="radio"] {
@@ -365,14 +354,8 @@
 			font-weight: 700;
 			border-radius: 8px;
 			cursor: pointer;
-			display: inline-block;
 			text-decoration: none;
-			box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-			transition: background-color 0.2s;
-		}
-
-		.btn-submit:hover {
-			background-color: #1d4ed8;
+			display: inline-block;
 		}
 
 		.footer {
@@ -397,15 +380,15 @@
 			<div class="control-grid">
 				<div class="control-group">
 					<label for="inputClientName">Client Contact Name:</label>
-					<input type="text" id="inputClientName" value="Jane Doe" oninput="updateLivePreview()">
+					<input type="text" id="inputClientName" placeholder="Enter Client Name" oninput="updateLivePreview()">
 				</div>
 				<div class="control-group">
 					<label for="inputBusinessName">Business Name:</label>
-					<input type="text" id="inputBusinessName" value="Test Business" oninput="updateLivePreview()">
+					<input type="text" id="inputBusinessName" placeholder="Enter Business Name" oninput="updateLivePreview()">
 				</div>
 				<div class="control-group">
 					<label for="inputWebsite">Website URL:</label>
-					<input type="text" id="inputWebsite" value="www.testbusiness.com" oninput="updateLivePreview()">
+					<input type="text" id="inputWebsite" placeholder="www.example.com" oninput="updateLivePreview()">
 				</div>
 				<div class="control-group">
 					<label for="pageCountInput">Page Count Scope:</label>
@@ -443,287 +426,281 @@
 			</div>
 
 			<!-- Greeting & Info Grid -->
-			<p>Hi <strong id="previewClientName">Jane Doe</strong>,</p>
-			<p>Thank you for reviewing your web presence assessment with OneTap Technology. Below is your tailored growth roadmap and investment breakdown for <strong id="previewBusinessName">Test Business</strong>.</p>
+			<p>Hi <strong id="previewClientName"></strong>,</p>
+			<p>Thank you for reviewing your web presence assessment with OneTap Technology. Below is your tailored growth roadmap and investment breakdown for <strong id="previewBusinessName"></strong>.</p>
 
 			<div class="info-grid">
 				<div class="info-item">
-					<p>Client: <strong id="previewBusinessCardName">Test Business</strong></p>
-					<p>Website: <strong id="previewWebsite">www.testbusiness.com</strong></p>
-				</div>
-				<div class="info-item">
-					<p>Page Scope: <strong id="previewPageScope">5 Pages</strong></p>
-					<p>Selected Tier: <strong style="color: var(--accent);" id="previewTierName">Custom Enterprise Package</strong></p>
-				</div>
-			</div>
-
-			<!-- Strategy -->
-			<h3>Project Strategy & Scope</h3>
-			<div class="strategy-box" id="previewStrategyText">
-				Designed for an extensive website architecture or custom features (online store / system integrations), delivering robust multi-page structuring, automated workflows, and high-capacity performance.
-			</div>
-
-			<!-- Findings & Improvements Grid -->
-			<div class="audit-grid">
-				<div class="audit-col findings">
-					<h4>⚠️ What We Observed</h4>
-					<ul>
-						<li>Website scale identified as matching required page tier.</li>
-						<li>Current layout appears dated or visually unpolished.</li>
-						<li>Mobile smartphone experience is awkward, leading to lost leads.</li>
-						<li>Text messaging lacks clarity regarding customer benefits.</li>
-						<li>Visitors cannot easily tell what services are offered in the first 3 seconds.</li>
-						<li>Action buttons are hidden or missing.</li>
-						<li>Required functional setup: Online booking, Photo gallery, Reviews feed, Social integration, Newsletter signup.</li>
-					</ul>
-				</div>
-				<div class="audit-col improvements">
-					<h4>🚀 Recommended Fixes</h4>
-					<ul>
-						<li>Build and format pages with unified layout architecture.</li>
-						<li>Deploy a clean, modern aesthetic that builds immediate trust.</li>
-						<li>Optimize 100% of pages for smartphone tapability and speed.</li>
-						<li>Refine headline phrasing so visitors immediately understand offerings.</li>
-						<li>Implement prominent header hero sections with clear bullet points.</li>
-						<li>Place obvious "Call Now" or "Book Online" CTAs across every page.</li>
-						<li>Integrate and test all requested features.</li>
-					</ul>
-				</div>
-			</div>
-
-			<!-- Payment Selection Section -->
-			<div class="payment-section">
-				<h3 style="margin-top: 0; border-left-color: var(--success);">Select Your Investment Option</h3>
-				<p style="font-size: 0.9rem; color: #475569; margin-bottom: 15px;">Affordable, scale-based project pricing tailored specifically for your scope. Please choose your preferred payment structure:</p>
-
-				<div class="payment-options-grid">
-					<!-- Option 1: Pay in Full with strike-through standard price and 10% off total -->
-					<div class="payment-card option-1 selected" id="opt1Card" onclick="selectPaymentOption(1)">
-						<input type="radio" name="paymentOption" id="radioOpt1" checked onchange="selectPaymentOption(1)">
-						<span class="badge">Best Value</span>
-						<h5>Pay in Full (10% Off)</h5>
-						<div class="price-tag" id="opt1PriceTag">
-							<span class="original-price" id="opt1Original">$1,249</span>
-							<span class="discounted-price" id="opt1Discounted">$1,124</span>
-						</div>
-						<p class="desc" id="opt1Desc">You instantly save $125 off standard pricing.</p>
-					</div>
-
-					<!-- Option 2: 4-Month Split Plan showing combined total sum in main price tag and breakdown in subtitle -->
-					<div class="payment-card option-2" id="opt2Card" onclick="selectPaymentOption(2)">
-						<input type="radio" name="paymentOption" id="radioOpt2" onchange="selectPaymentOption(2)">
-						<span class="badge">Cash Flow Friendly</span>
-						<h5>4-Month Split Plan</h5>
-						<div class="price-tag" id="opt2PriceTag">
-							<span class="split-total-price" id="opt2SplitTotal">$1,249</span>
-						</div>
-						<p class="desc" id="opt2Desc"><strong>$625 down</strong> + <strong>$156.25/mo</strong> for 4 months.</p>
+					<p>Business Name: <strong id="previewBusinessCardName"></strong></p>
+					<p>Website: <strong id="previewWebsite"></strong></p>
+					<div class="info-item">
+						<p>Page Scope: <strong id="previewPageScope">5 Pages</strong></p>
+						<p>Selected Tier: <strong style="color: var(--accent);" id="previewTierName">Custom Enterprise Package</strong></p>
 					</div>
 				</div>
-			</div>
 
-			<!-- Acceptance Action Button -->
-			<div class="action-container">
-				<a href="#" id="acceptButton" class="btn-submit" onclick="handleAcceptProposal(event)">
-					Accept Proposal & Send Confirmation ✉️
-				</a>
-				<p style="font-size: 0.8rem; color: #64748b; margin-top: 12px;">Clicking this opens your email client pre-configured with your selected dynamic payment option.</p>
-			</div>
+				<!-- Strategy -->
+				<h3>Project Strategy & Scope</h3>
+				<div class="strategy-box" id="previewStrategyText">
+					Designed for an extensive website architecture or custom features (online store / system integrations), delivering robust multi-page structuring, automated workflows, and high-capacity performance.
+				</div>
 
-			<!-- Footer -->
-			<div class="footer">
-				<strong>OneTap Technology</strong> — Professional Web Development & Digital Growth Solutions
+				<!-- Findings & Improvements Grid -->
+				<div class="audit-grid">
+					<div class="audit-col findings">
+						<h4>⚠️ What We Observed</h4>
+						<ul>
+							<li>Website scale identified as matching required page tier.</li>
+							<li>Current layout appears dated or visually unpolished.</li>
+							<li>Mobile smartphone experience is awkward, leading to lost leads.</li>
+							<li>Text messaging lacks clarity regarding customer benefits.</li>
+							<li>Visitors cannot easily tell what services are offered in the first 3 seconds.</li>
+							<li>Action buttons are hidden or missing.</li>
+							<li>Required functional setup: Online booking, Photo gallery, Reviews feed, Social integration, Newsletter signup.</li>
+						</ul>
+					</div>
+					<div class="audit-col improvements">
+						<h4>🚀 Recommended Fixes</h4>
+						<ul>
+							<li>Build and format pages with unified layout architecture.</li>
+							<li>Deploy a clean, modern aesthetic that builds immediate trust.</li>
+							<li>Optimize 100% of pages for smartphone tapability and speed.</li>
+							<li>Refine headline phrasing so visitors immediately understand offerings.</li>
+							<li>Implement prominent header hero sections with clear bullet points.</li>
+							<li>Place obvious "Call Now" or "Book Online" CTAs across every page.</li>
+							<li>Integrate and test all requested features.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Payment Selection Section -->
+				<div class="payment-section">
+					<h3 style="margin-top: 0; border-left-color: var(--success);">Select Your Investment Option</h3>
+					<p style="font-size: 0.9rem; color: #475569; margin-bottom: 15px;">Affordable, scale-based project pricing tailored specifically for your scope. Please choose your preferred payment structure:</p>
+
+					<div class="payment-options-grid">
+						<!-- Option 1: Pay in Full with strike-through standard price and 10% off total -->
+						<div class="payment-card option-1 selected" id="opt1Card" onclick="selectPaymentOption(1)">
+							<input type="radio" name="paymentOption" id="radioOpt1" checked onchange="selectPaymentOption(1)">
+							<span class="badge">Best Value</span>
+							<h5>Pay in Full (10% Off)</h5>
+							<div class="price-tag" id="opt1PriceTag">
+								<span class="original-price" id="opt1Original">$1,249</span>
+								<span class="discounted-price" id="opt1Discounted">$1,124</span>
+							</div>
+							<p class="desc" id="opt1Desc">You instantly save $125 off standard pricing.</p>
+						</div>
+
+						<!-- Option 2: 4-Month Split Plan showing combined total sum in main price tag and breakdown in subtitle -->
+						<div class="payment-card option-2" id="opt2Card" onclick="selectPaymentOption(2)">
+							<input type="radio" name="paymentOption" id="radioOpt2" onchange="selectPaymentOption(2)">
+							<span class="badge">Cash Flow Friendly</span>
+							<h5>4-Month Split Plan</h5>
+							<div class="price-tag" id="opt2PriceTag">
+								<span class="split-total-price" id="opt2SplitTotal">$1,249</span>
+							</div>
+							<p class="desc" id="opt2Desc"><strong>$625 down</strong> + <strong>$156.25/mo</strong> for 4 months.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Acceptance Action Button -->
+				<div class="action-container">
+					<a href="#" id="acceptButton" class="btn-submit" onclick="handleAcceptProposal(event)">
+						Accept Proposal & Send Confirmation ✉️
+					</a>
+					<p style="font-size: 0.8rem; color: #64748b; margin-top: 12px;">Clicking this opens your email client pre-configured with your selected dynamic payment option.</p>
+				</div>
+
+				<!-- Footer -->
+				<div class="footer">
+					<strong>OneTap Technology</strong> — Professional Web Development & Digital Growth Solutions
+				</div>
+
 			</div>
 
 		</div>
 
-	</div>
+		<script>
+			let selectedOption = 1;
 
-	<script>
-		let selectedOption = 1;
+			function selectPaymentOption(optionNum) {
+				selectedOption = optionNum;
+				const card1 = document.getElementById('opt1Card');
+				const card2 = document.getElementById('opt2Card');
+				const radio1 = document.getElementById('radioOpt1');
+				const radio2 = document.getElementById('radioOpt2');
 
-		function selectPaymentOption(optionNum) {
-			selectedOption = optionNum;
-			const card1 = document.getElementById('opt1Card');
-			const card2 = document.getElementById('opt2Card');
-			const radio1 = document.getElementById('radioOpt1');
-			const radio2 = document.getElementById('radioOpt2');
-
-			if (optionNum === 1) {
-				card1.classList.add('selected');
-				card2.classList.remove('selected');
-				radio1.checked = true;
-				radio2.checked = false;
-			} else {
-				card2.classList.add('selected');
-				card1.classList.remove('selected');
-				radio2.checked = true;
-				radio1.checked = false;
-			}
-		}
-
-		// Pricing calculation engine
-		function calculateProposalData(pageCount, complexity) {
-			const baseFee = 499;
-			const pricePerPage = 150;
-
-			let subtotal = baseFee + (pageCount * pricePerPage);
-			let multiplier = (complexity === 'advanced') ? 1.2 : 1.0;
-
-			let standardPrice = Math.round(subtotal * multiplier);
-			let payInFullPrice = Math.round(standardPrice * 0.90);
-			let savings = standardPrice - payInFullPrice;
-
-			let downPayment = Math.round(standardPrice * 0.50);
-			let remainingBalance = standardPrice - downPayment;
-			let monthlyPayment = (remainingBalance / 4).toFixed(2);
-
-			// Combined total sum of down payment plus 4 monthly payments
-			let splitPlanTotalSum = downPayment + (parseFloat(monthlyPayment) * 4);
-
-			return {
-				pageCount,
-				standardPrice,
-				payInFullPrice,
-				savings,
-				downPayment,
-				monthlyPayment,
-				splitPlanTotalSum
-			};
-		}
-
-		// Live preview update for admin panel typing
-		function updateLivePreview() {
-			const cName = document.getElementById('inputClientName').value || "Jane Doe";
-			const bName = document.getElementById('inputBusinessName').value || "Test Business";
-			const web = document.getElementById('inputWebsite').value || "www.testbusiness.com";
-			const pages = parseInt(document.getElementById('pageCountInput').value) || 5;
-			const comp = document.getElementById('complexityInput').value;
-
-			document.getElementById('previewClientName').innerText = cName;
-			document.getElementById('previewBusinessName').innerText = bName;
-			document.getElementById('previewBusinessCardName').innerText = bName;
-			document.getElementById('previewWebsite').innerText = web;
-			document.getElementById('previewPageScope').innerText = pages + ' Pages';
-			document.getElementById('previewTierName').innerText = (pages >= 7 || comp === 'advanced') ? "Custom Enterprise Package" : "Standard Growth Package";
-
-			const data = calculateProposalData(pages, comp);
-
-			document.getElementById('opt1Original').innerText = '$' + data.standardPrice.toLocaleString();
-			document.getElementById('opt1Discounted').innerText = '$' + data.payInFullPrice.toLocaleString();
-			document.getElementById('opt1Desc').innerText = 'You instantly save $' + data.savings.toLocaleString() + ' off standard pricing.';
-
-			document.getElementById('opt2SplitTotal').innerText = '$' + data.splitPlanTotalSum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-			document.getElementById('opt2Desc').innerHTML = '<strong>$' + data.downPayment.toLocaleString() + ' down</strong> + <strong>$' + data.monthlyPayment + '/mo</strong> for 4 months.';
-		}
-
-		// Generate secure URL containing encoded parameters
-		function generateClientLink() {
-			const cName = document.getElementById('inputClientName').value;
-			const bName = document.getElementById('inputBusinessName').value;
-			const web = document.getElementById('inputWebsite').value;
-			const pages = document.getElementById('pageCountInput').value;
-			const comp = document.getElementById('complexityInput').value;
-
-			const dataObj = { c: cName, b: bName, w: web, p: pages, x: comp };
-			const encodedData = btoa(JSON.stringify(dataObj));
-
-			const secureURL = window.location.origin + window.location.pathname + '#' + encodedData;
-
-			navigator.clipboard.writeText(secureURL).then(() => {
-				const notification = document.getElementById('copyNotification');
-				notification.style.display = 'inline';
-				setTimeout(() => { notification.style.display = 'none'; }, 4000);
-			});
-		}
-
-		window.onload = function() {
-			if (window.location.hash) {
-				try {
-					const hashData = window.location.hash.substring(1);
-					const decoded = JSON.parse(atob(hashData));
-
-					document.getElementById('inputClientName').value = decoded.c || "Jane Doe";
-					document.getElementById('inputBusinessName').value = decoded.b || "Test Business";
-					document.getElementById('inputWebsite').value = decoded.w || "www.testbusiness.com";
-					document.getElementById('pageCountInput').value = decoded.p || "5";
-					document.getElementById('complexityInput').value = decoded.x || "standard";
-
-					// Hide the admin box when opened by a client via secure link
-					document.getElementById('adminPanel').style.display = 'none';
-				} catch (e) {
-					console.error("Invalid proposal token");
+				if (optionNum === 1) {
+					card1.classList.add('selected');
+					card2.classList.remove('selected');
+					radio1.checked = true;
+					radio2.checked = false;
+				} else {
+					card2.classList.add('selected');
+					card1.classList.remove('selected');
+					radio2.checked = true;
+					radio1.checked = false;
 				}
 			}
 
-			// Render initial state
-			updateLivePreview();
-		};
+			// Pricing calculation engine
+			function calculateProposalData(pageCount, complexity) {
+				const baseFee = 499;
+				const pricePerPage = 150;
 
-		// Acceptance email action handler
-		function handleAcceptProposal(e) {
-			e.preventDefault();
+				let subtotal = baseFee + (pageCount * pricePerPage);
+				let multiplier = (complexity === 'advanced') ? 1.2 : 1.0;
 
-			const recipient = "campbellmystique@gmail.com";
+				let standardPrice = Math.round(subtotal * multiplier);
+				let payInFullPrice = Math.round(standardPrice * 0.90);
+				let savings = standardPrice - payInFullPrice;
 
-			let clientName = document.getElementById('previewClientName').innerText;
-			let businessName = document.getElementById('previewBusinessName').innerText;
-			let websiteUrl = document.getElementById('previewWebsite').innerText;
-			let pageScopeText = document.getElementById('previewPageScope').innerText;
+				let downPayment = Math.round(standardPrice * 0.50);
+				let remainingBalance = standardPrice - downPayment;
+				let monthlyPayment = (remainingBalance / 4).toFixed(2);
 
-			let activePageCount = parseInt(pageScopeText) || 5;
-			let activeComplexity = document.getElementById('complexityInput').value;
+				let splitPlanTotalSum = downPayment + (parseFloat(monthlyPayment) * 4);
 
-			if (window.location.hash) {
-				try {
-					const decoded = JSON.parse(atob(window.location.hash.substring(1)));
-					activeComplexity = decoded.x || 'standard';
-				} catch (err) {}
+				return {
+					pageCount,
+					standardPrice,
+					payInFullPrice,
+					savings,
+					downPayment,
+					monthlyPayment,
+					splitPlanTotalSum
+				};
 			}
 
-			const data = calculateProposalData(activePageCount, activeComplexity);
+			// Live preview update for admin panel typing
+			function updateLivePreview() {
+				const bName = document.getElementById('inputBusinessName').value || "";
+				const web = document.getElementById('inputWebsite').value || "";
+				const pages = parseInt(document.getElementById('pageCountInput').value) || 5;
+				const comp = document.getElementById('complexityInput').value;
 
-			let paymentPlanText = "";
-			let paymentDescText = "";
+				document.getElementById('previewBusinessName').innerText = bName;
+				document.getElementById('previewBusinessCardName').innerText = bName;
+				document.getElementById('previewWebsite').innerText = web;
+				document.getElementById('previewPageScope').innerText = pages + ' Pages';
+				document.getElementById('previewTierName').innerText = (pages >= 7 || comp === 'advanced') ? "Custom Enterprise Package" : "Standard Growth Package";
 
-			if (selectedOption === 1) {
-				paymentPlanText = "Pay in Full Plan (10% Off)";
-				paymentDescText = `Payment: $${data.payInFullPrice.toLocaleString()} total (Standard $${data.standardPrice.toLocaleString()} with 10% Discount Applied - Saved $${data.savings.toLocaleString()})`;
-			} else {
-				paymentPlanText = "4 Month Split Plan (Cash Flow Friendly)";
-				paymentDescText = `Payment: $${data.downPayment.toLocaleString()} down + $${data.monthlyPayment}/month for 4 months (Total Combined Sum: $${data.splitPlanTotalSum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})})`;
+				const data = calculateProposalData(pages, comp);
+
+				document.getElementById('opt1Original').innerText = '$' + data.standardPrice.toLocaleString();
+				document.getElementById('opt1Discounted').innerText = '$' + data.payInFullPrice.toLocaleString();
+				document.getElementById('opt1Desc').innerText = 'You instantly save $' + data.savings.toLocaleString() + ' off standard pricing.';
+
+				document.getElementById('opt2SplitTotal').innerText = '$' + data.splitPlanTotalSum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+				document.getElementById('opt2Desc').innerHTML = '<strong>$' + data.downPayment.toLocaleString() + ' down</strong> + <strong>$' + data.monthlyPayment + '/mo</strong> for 4 months.';
 			}
 
-			const subject = `Proposal Acceptance: ${businessName} - ${clientName}`;
 
-			const body =
-				"Hi OneTap Technology Team,\r\n" +
-				"\r\n" +
-				"I have reviewed the proposal for " + businessName + " and am ready to move forward with the project.\r\n" +
-				"\r\n" +
-				"==============================\r\n" +
-				"CLIENT & PROJECT DETAILS\r\n" +
-				"==============================\r\n" +
-				"• Business Name: " + businessName + "\r\n" +
-				"• Website: " + websiteUrl + "\r\n" +
-				"• Selected Solution: Custom Enterprise Package (" + activePageCount + " Pages)\r\n" +
-				"\r\n" +
-				"==============================\r\n" +
-				"PAYMENT SELECTION\r\n" +
-				"==============================\r\n" +
-				"• Chosen Payment Plan: " + paymentPlanText + "\r\n" +
-				"• " + paymentDescText + "\r\n" +
-				"\r\n" +
-				"Please review these details and send over the invoice or onboarding agreement at your earliest convenience so we can get started.\r\n" +
-				"\r\n" +
-				"Best regards,\r\n" +
-				"\r\n" +
-				businessName;
+			// Generate secure URL containing encoded parameters
+			function generateClientLink() {
+				const cName = document.getElementById('inputClientName').value;
+				const bName = document.getElementById('inputBusinessName').value;
+				const web = document.getElementById('inputWebsite').value;
+				const pages = document.getElementById('pageCountInput').value;
+				const comp = document.getElementById('complexityInput').value;
 
-			const mailtoLink = "mailto:" + recipient + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-			window.location.href = mailtoLink;
-		}
-	</script>
+				const dataObj = { c: cName, b: bName, w: web, p: pages, x: comp };
+				const encodedData = btoa(JSON.stringify(dataObj));
+
+				const secureURL = window.location.origin + window.location.pathname + '#' + encodedData;
+
+				navigator.clipboard.writeText(secureURL).then(() => {
+					const notification = document.getElementById('copyNotification');
+					notification.style.display = 'inline';
+					setTimeout(() => { notification.style.display = 'none'; }, 4000);
+				});
+			}
+
+			window.onload = function() {
+				if (window.location.hash) {
+					try {
+						const hashData = window.location.hash.substring(1);
+						const decoded = JSON.parse(atob(hashData));
+
+						document.getElementById('inputClientName').value = decoded.c || "";
+						document.getElementById('inputBusinessName').value = decoded.b || "";
+						document.getElementById('inputWebsite').value = decoded.w || "";
+						document.getElementById('pageCountInput').value = decoded.p || "5";
+						document.getElementById('complexityInput').value = decoded.x || "standard";
+
+						document.getElementById('adminPanel').style.display = 'none';
+					} catch (e) {
+						console.error("Invalid proposal token");
+					}
+				}
+
+				updateLivePreview();
+			};
+
+			// Acceptance email action handler
+			function handleAcceptProposal(e) {
+				e.preventDefault();
+
+				const recipient = "campbellmystique@gmail.com";
+
+				let businessName = document.getElementById('previewBusinessName').innerText;
+				let websiteUrl = document.getElementById('previewWebsite').innerText;
+				let pageScopeText = document.getElementById('previewPageScope').innerText;
+
+				let activePageCount = parseInt(pageScopeText) || 5;
+				let activeComplexity = document.getElementById('complexityInput').value;
+
+				if (window.location.hash) {
+					try {
+						const decoded = JSON.parse(atob(window.location.hash.substring(1)));
+						activeComplexity = decoded.x || 'standard';
+					} catch (err) {}
+				}
+
+				const data = calculateProposalData(activePageCount, activeComplexity);
+
+				let paymentPlanText = "";
+				let paymentDescText = "";
+
+				if (selectedOption === 1) {
+					paymentPlanText = "Pay in Full Plan (10% Off)";
+					paymentDescText = `Payment: $${data.payInFullPrice.toLocaleString()} total (Standard $${data.standardPrice.toLocaleString()} with 10% Discount Applied - Saved $${data.savings.toLocaleString()})`;
+				} else {
+					paymentPlanText = "4 Month Split Plan (Cash Flow Friendly)";
+					paymentDescText = `Payment: $${data.downPayment.toLocaleString()} down + $${data.monthlyPayment}/month for 4 months (Total Combined Sum: $${data.splitPlanTotalSum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})})`;
+				}
+
+				const subject = `Proposal Acceptance: ${businessName}`;
+
+				const body =
+					"Hi OneTap Technology Team,\r\n" +
+					"\r\n" +
+					"I have reviewed the proposal for " + businessName + " and am ready to move forward with the project.\r\n" +
+					"\r\n" +
+					"==============================\r\n" +
+					"CLIENT & PROJECT DETAILS\r\n" +
+					"==============================\r\n" +
+					"• Business Name: " + businessName + "\r\n" +
+					"• Website: " + websiteUrl + "\r\n" +
+					"• Selected Solution: Custom Enterprise Package (" + activePageCount + " Pages)\r\n" +
+					"\r\n" +
+					"==============================\r\n" +
+					"PAYMENT SELECTION\r\n" +
+					"==============================\r\n" +
+					"• Chosen Payment Plan: " + paymentPlanText + "\r\n" +
+					"• " + paymentDescText + "\r\n" +
+					"\r\n" +
+					"Please review these details and send over the invoice or onboarding agreement at your earliest convenience so we can get started.\r\n" +
+					"\r\n" +
+					"Best regards,\r\n" +
+					"\r\n" +
+					businessName;
+
+				const mailtoLink = "mailto:" + recipient + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+				window.location.href = mailtoLink;
+			}
+		</script>
 
 </body>
 
